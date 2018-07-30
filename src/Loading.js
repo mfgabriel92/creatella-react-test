@@ -4,7 +4,7 @@ class Loading extends Component {
   render() {
     return (
       <div>
-        <div className="loader m-auto"></div>
+        <div className="loader"></div>
         <span className="small text-muted">Loading...</span>
       </div>
     )
