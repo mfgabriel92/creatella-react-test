@@ -7,7 +7,7 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      products: []
+      products: [],
     }
   }
 
@@ -52,24 +52,22 @@ class Home extends Component {
   };
 
   handleOnChange(e) {
+    const { products } = this.state;
+
+    let list = [];
+
     switch (e.target.value) {
       case "size":
-        this.setState({
-          products: this.state.products.sort((a, b) => { return a.size - b.size})
-        });
-
+        list = products.sort((a, b) => { return a.size - b.size});
         break;
       case "price":
-        this.setState({
-          products: this.state.products.sort((a, b) => { return a.price - b.price})
-        });
-
+        list = products.sort((a, b) => { return a.price - b.price});
         break;
       case "id":
         break;
-      default:
-        this.fetchFaces();
     }
+
+    this.setState({ products: list });
   }
 
   render() {
