@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Face from "./Face";
 
 class Home extends Component {
   constructor(props) {
@@ -17,9 +18,33 @@ class Home extends Component {
       })
   }
 
+  componentDidCatch() {
+    alert("Error")
+  }
+
+  renderFaces() {
+    const { products } = this.state;
+
+    return (
+      <div className="col-12 faces">
+        <div className="row">
+          {
+            products.map((face) => {
+              return (
+                <div key={face.id} className="col-lg-3 col-md-3 col-sm-2 col-xs-1 text-center">
+                  <Face face={face.face} size={face.size} price={face.price} />
+                </div>
+              )
+            })
+          }
+        </div>
+      </div>
+    )
+  };
+
   render() {
     return (
-      <div>
+      <div className="container">
         <h1>Products Grid</h1>
 
         <p>
@@ -30,6 +55,8 @@ class Home extends Component {
         <p>But first, a word from our sponsors:</p>
 
         <img className="ad" src={`/ads/?r=${Math.floor(Math.random()*1000)}`}/>
+
+        {this.renderFaces()}
       </div>
     )
   }
