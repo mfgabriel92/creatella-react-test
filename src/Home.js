@@ -8,24 +8,54 @@ class Home extends Component {
 
     this.state = {
       products: [],
+      page: 1,
+      limit: 20,
+      isLoading: false
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.fetchFaces();
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll.bind(this));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll.bind(this));
   }
 
   componentDidCatch() {
     alert("Error")
   }
 
-  fetchFaces() {
-    fetch("http://localhost:3000/products")
+  fetchFaces(sort = null) {
+    const { products, page, limit } = this.state;
+
+    let endpoint = `http://localhost:3000/products?_page=${page}&_limit=${limit}`;
+
+    if (sort) {
+      endpoint += `&_sort=${sort}`;
+    }
+
+    fetch(endpoint)
       .then((res) => {
         return res.json()
       })
-      .then((products) => {
-        this.setState({ products })
+      .then((data) => {
+        let list = [];
+
+        if (products.length === 0) {
+          list = data
+        } else {
+          list = products.concat(data)
+        }
+
+        this.setState({
+          products: list,
+          isLoading: false
+        })
       })
   }
 
@@ -33,11 +63,7 @@ class Home extends Component {
     const { products } = this.state;
 
     if (products.length === 0) {
-      return (
-        <div className="text-center m-auto">
-          <Loading/>
-        </div>
-      )
+      return <Loading/>;
     }
 
     return (
@@ -51,32 +77,60 @@ class Home extends Component {
     )
   };
 
+  handleScroll() {
+    let wHeight = window.innerHeight;
+    let scrollY = window.scrollY;
+    let oHeight = document.body.offsetHeight;
+
+    if ((wHeight + scrollY) >= oHeight) {
+      this.setState({
+        page: this.state.page + 1,
+        isLoading: true
+      });
+
+      this.fetchFaces();
+    }
+  }
+
   handleOnChange(e) {
-    const { products } = this.state;
+    const allowedSorts = ["size", "price", "id"];
+    const { value } = e.target;
 
-    let list = [];
-
-    switch (e.target.value) {
-      case "size":
-        list = products.sort((a, b) => { return a.size - b.size });
-        break;
-      case "price":
-        list = products.sort((a, b) => { return a.price - b.price });
-        break;
-      case "id":
-        list = products.sort((a, b) => {
-          let idA = a.id.substring(0, 4);
-          let idB = b.id.substring(0, 4);
-
-          return idA - idB;
-        });
-        break;
+    if (!allowedSorts.includes(value)) {
+      alert("Error while sorting. Invalid parameter");
+      return;
     }
 
-    this.setState({ products: list });
+    this.setState({ products: [] });
+    this.fetchFaces(value)
+
+    // const { products } = this.state;
+    //
+    // let list = [];
+    //
+    // switch (e.target.value) {
+    //   case "size":
+    //     list = products.sort((a, b) => { return a.size - b.size });
+    //     break;
+    //   case "price":
+    //     list = products.sort((a, b) => { return a.price - b.price });
+    //     break;
+    //   case "id":
+    //     list = products.sort((a, b) => {
+    //       let idA = a.id.substring(0, 4);
+    //       let idB = b.id.substring(0, 4);
+    //
+    //       return idA - idB;
+    //     });
+    //     break;
+    // }
+    //
+    // this.setState({ products: list });
   }
 
   render() {
+    const { isLoading } = this.state;
+
     return (
       <div className="container">
         <h1>Products Grid</h1>
@@ -98,6 +152,8 @@ class Home extends Component {
             </select>
 
             {this.renderFaces()}
+
+            <Loading show={isLoading}/>
           </div>
         </div>
       </div>
