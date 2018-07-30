@@ -58,12 +58,18 @@ class Home extends Component {
 
     switch (e.target.value) {
       case "size":
-        list = products.sort((a, b) => { return a.size - b.size});
+        list = products.sort((a, b) => { return a.size - b.size });
         break;
       case "price":
-        list = products.sort((a, b) => { return a.price - b.price});
+        list = products.sort((a, b) => { return a.price - b.price });
         break;
       case "id":
+        list = products.sort((a, b) => {
+          let idA = a.id.substring(0, 4);
+          let idB = b.id.substring(0, 4);
+
+          return idA - idB;
+        });
         break;
     }
 
