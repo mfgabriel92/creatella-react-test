@@ -6,7 +6,7 @@ class Face extends Component {
     let price = value.toString();
     let len = price.length;
     let a = price.slice(0, 1);
-    let b = price.substr(1, price.length);
+    let b = price.substr(1, len);
     let output = `$${a}.${b}`;
 
     if (len === 2) {
