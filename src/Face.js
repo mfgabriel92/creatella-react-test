@@ -16,13 +16,34 @@ class Face extends Component {
     return output;
   }
 
+  formatDate(value) {
+    let date = new Date(value);
+    let dateNow = new Date();
+    let dayAdded = date.getDate();
+    let today = dateNow.getDate();
+    let interval = today - dayAdded ;
+    let output = "Today";
+
+    if (interval < 6) {
+      let d = interval === 1 ? "day" : "days";
+      output = `${interval} ${d} ago`;
+    } else if (interval > 6) {
+      let month = date.getMonth();
+      let year = date.getFullYear();
+      output = `${month}/${dayAdded}/${year}`;
+    }
+
+    return output;
+  }
+
   render() {
-    const { face, size, price } = this.props;
+    const { face, size, price, date } = this.props;
 
     return(
       <div className="face">
         <div style={{fontSize: size}}>{face}</div>
-        <span className="small">{this.formatPrice(price)}</span>
+        <div className="small">{this.formatPrice(price)}</div>
+        <div className="small">{this.formatDate(date)}</div>
       </div>
     )
   }
@@ -32,6 +53,7 @@ Face.propTypes = {
   face: PropTypes.string.isRequired,
   size: PropTypes.number.isRequired,
   price: PropTypes.number.isRequired,
+  date: PropTypes.string.isRequired,
 };
 
 export default Face;
