@@ -25,6 +25,12 @@ class Home extends Component {
   renderFaces() {
     const { products } = this.state;
 
+    if (products.length === 0) {
+      return (
+        <div className="text-center">Loading...</div>
+      )
+    }
+
     return (
       <div className="col-12 faces">
         <div className="row">
