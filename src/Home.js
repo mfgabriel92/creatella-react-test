@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Face from "./Face";
+import Loading from "./Loading";
 
 class Home extends Component {
   constructor(props) {
@@ -27,7 +28,9 @@ class Home extends Component {
 
     if (products.length === 0) {
       return (
-        <div className="text-center">Loading...</div>
+        <div className="text-center">
+          <Loading/>
+        </div>
       )
     }
 
