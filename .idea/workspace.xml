@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="039590c4-8c36-4f3d-8b48-30deac122d1e" name="Default Changelist" comment="First commit; implement React.js">
-      <change beforePath="$PROJECT_DIR$/.idea/creatella-react-test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/creatella-react-test.iml" afterDir="false" />
+    <list default="true" id="039590c4-8c36-4f3d-8b48-30deac122d1e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Face.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Face.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Home.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,39 +29,39 @@
         <counts>
           <entry key="gitignore" value="3" />
           <entry key="html" value="5" />
-          <entry key="js" value="26" />
+          <entry key="js" value="32" />
           <entry key="json" value="6" />
-          <entry key="md" value="2" />
-          <entry key="scss" value="2" />
+          <entry key="md" value="6" />
+          <entry key="scss" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="HTML" value="5" />
           <entry key="JSON" value="6" />
-          <entry key="JavaScript" value="26" />
-          <entry key="Markdown" value="2" />
+          <entry key="JavaScript" value="32" />
+          <entry key="Markdown" value="6" />
           <entry key="PLAIN_TEXT" value="3" />
-          <entry key="SCSS" value="2" />
+          <entry key="SCSS" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gitignore" value="76" />
           <entry key="html" value="18" />
-          <entry key="js" value="2115" />
+          <entry key="js" value="3664" />
           <entry key="json" value="44" />
-          <entry key="scss" value="66" />
-          <entry key="txt" value="190" />
+          <entry key="scss" value="107" />
+          <entry key="txt" value="342" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="18" />
           <entry key="JSON" value="44" />
-          <entry key="JavaScript" value="2115" />
-          <entry key="PLAIN_TEXT" value="266" />
-          <entry key="SCSS" value="66" />
+          <entry key="JavaScript" value="3664" />
+          <entry key="PLAIN_TEXT" value="418" />
+          <entry key="SCSS" value="107" />
         </counts>
       </usages-collector>
     </session>
@@ -70,8 +71,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Home.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="34" column="75" selection-start-line="34" selection-start-column="75" selection-end-line="34" selection-end-column="75" />
+            <state relative-caret-position="300">
+              <caret line="69" column="14" lean-forward="true" selection-start-line="69" selection-start-column="14" selection-end-line="69" selection-end-column="14" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -82,21 +83,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Face.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+            <state relative-caret-position="285">
+              <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor />
-              <second_editor />
             </state>
           </provider>
         </entry>
@@ -125,6 +116,8 @@
         <option value="$PROJECT_DIR$/webpack.config.js" />
         <option value="$PROJECT_DIR$/src/app.js" />
         <option value="$PROJECT_DIR$/src/style/app.scss" />
+        <option value="$PROJECT_DIR$/src/Loading.js" />
+        <option value="$PROJECT_DIR$/src/style/loading.scss" />
         <option value="$PROJECT_DIR$/src/Home.js" />
         <option value="$PROJECT_DIR$/src/Face.js" />
       </list>
@@ -268,7 +261,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.JavaScript" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -301,7 +294,7 @@
       <workItem from="1532926558809" duration="6248000" />
       <workItem from="1532939776248" duration="3141000" />
       <workItem from="1532943332219" duration="196000" />
-      <workItem from="1532943583434" duration="6782000" />
+      <workItem from="1532943583434" duration="13038000" />
     </task>
     <task id="LOCAL-00001" summary="First commit; implement React.js">
       <created>1532931309199</created>
@@ -324,11 +317,46 @@
       <option name="project" value="LOCAL" />
       <updated>1532957616518</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Use `len` variable instead of using `price.length` again.">
+      <created>1532957710757</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1532957710757</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Display initial loading message">
+      <created>1532958011595</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1532958011595</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Display date">
+      <created>1532960843049</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1532960843049</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Add cute loading">
+      <created>1532962045324</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1532962045324</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Sort by size">
+      <created>1532963897630</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1532963897630</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16367000" />
+    <option name="totallyTimeSpent" value="22623000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-3" y="-24" width="1372" height="795" extended-state="0" />
@@ -349,7 +377,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32996634" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.29149234" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.29149234" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -368,7 +396,12 @@
     <MESSAGE value="First commit; implement React.js" />
     <MESSAGE value="Fetch all products from the endpoint" />
     <MESSAGE value="Display faces in a grid with formatted price below; add bootstrap and sass" />
-    <option name="LAST_COMMIT_MESSAGE" value="Display faces in a grid with formatted price below; add bootstrap and sass" />
+    <MESSAGE value="Use `len` variable instead of using `price.length` again." />
+    <MESSAGE value="Display initial loading message" />
+    <MESSAGE value="Display date" />
+    <MESSAGE value="Add cute loading" />
+    <MESSAGE value="Sort by size" />
+    <option name="LAST_COMMIT_MESSAGE" value="Sort by size" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/public/bundle.js">
@@ -423,18 +456,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/style/app.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Home.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="34" column="75" selection-start-line="34" selection-start-column="75" selection-end-line="34" selection-end-column="75" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="120">
+          <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -446,10 +469,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/style/loading.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Loading.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="30" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Home.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="69" column="14" lean-forward="true" selection-start-line="69" selection-start-column="14" selection-end-line="69" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Face.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+        <state relative-caret-position="285">
+          <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

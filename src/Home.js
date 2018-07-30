@@ -60,6 +60,10 @@ class Home extends Component {
 
         break;
       case "price":
+        this.setState({
+          products: this.state.products.sort((a, b) => { return a.price - b.price})
+        });
+
         break;
       case "id":
         break;

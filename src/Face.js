@@ -9,11 +9,15 @@ class Face extends Component {
     let b = price.substr(1, len);
     let output = `$${a}.${b}`;
 
-    if (len === 2) {
-      output = output + "0";
+    if (len === 1) {
+      output = `0.0${a}`;
+    } else if (len === 2) {
+      output = `${a}.${b}0`;
+    } else {
+      output = `${a}.${b}`;
     }
 
-    return output;
+    return `$${output}`;
   }
 
   formatDate(value) {
