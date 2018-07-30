@@ -8,10 +8,10 @@ const config = {
     path: path.resolve(__dirname, './public'),
     filename: 'bundle.js'
   },
+  mode: "development",
   plugins: [
     new LiveReloadPlugin()
   ],
-  mode: "development",
   module: {
     rules: [
       {
