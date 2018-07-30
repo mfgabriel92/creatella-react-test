@@ -83,12 +83,14 @@ class Home extends Component {
     let oHeight = document.body.offsetHeight;
 
     if ((wHeight + scrollY) >= oHeight) {
-      this.setState({
-        page: this.state.page + 1,
-        isLoading: true
-      });
+      if (!this.state.isLoading) {
+        this.setState({
+          page: this.state.page + 1,
+          isLoading: true
+        });
 
-      this.fetchFaces();
+        this.fetchFaces();
+      }
     }
   }
 
