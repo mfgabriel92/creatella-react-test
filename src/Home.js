@@ -10,6 +10,7 @@ class Home extends Component {
       products: [],
       page: 1,
       limit: 20,
+      sort: null,
       isLoading: false
     }
   }
@@ -83,13 +84,15 @@ class Home extends Component {
     let oHeight = document.body.offsetHeight;
 
     if ((wHeight + scrollY) >= oHeight) {
-      if (!this.state.isLoading) {
+      const { sort, isLoading } = this.state;
+
+      if (!isLoading) {
         this.setState({
           page: this.state.page + 1,
           isLoading: true
         });
 
-        this.fetchFaces();
+        this.fetchFaces(sort);
       }
     }
   }
@@ -103,35 +106,12 @@ class Home extends Component {
       return;
     }
 
-    this.setState({ products: [] });
-    this.fetchFaces(value)
-
-    // const { products } = this.state;
-    //
-    // let list = [];
-    //
-    // switch (e.target.value) {
-    //   case "size":
-    //     list = products.sort((a, b) => { return a.size - b.size });
-    //     break;
-    //   case "price":
-    //     list = products.sort((a, b) => { return a.price - b.price });
-    //     break;
-    //   case "id":
-    //     list = products.sort((a, b) => {
-    //       let idA = a.id.substring(0, 4);
-    //       let idB = b.id.substring(0, 4);
-    //
-    //       return idA - idB;
-    //     });
-    //     break;
-    // }
-    //
-    // this.setState({ products: list });
+    this.setState({ products: [], sort: value });
+    this.fetchFaces(value);
   }
 
   render() {
-    const { isLoading } = this.state;
+    const { products, isLoading } = this.state;
 
     return (
       <div className="container">
@@ -155,7 +135,7 @@ class Home extends Component {
 
             {this.renderFaces()}
 
-            <Loading show={isLoading}/>
+            {products.length >= 20 && <Loading show={isLoading}/>}
           </div>
         </div>
       </div>
