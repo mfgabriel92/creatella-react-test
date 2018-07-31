@@ -8,7 +8,7 @@ class Home extends Component {
     super(props);
 
     this.state = {
-      productsUri: 'http://localhost:3000/products',
+      productsUri: '/api/products',
       products: [],
       page: 1,
       limit: 20,
@@ -37,8 +37,7 @@ class Home extends Component {
   /**
    * Fetch the products from the endpoint.
    *
-   * @param sort order the products list by a given value price, size, or ID.
-   * of data.
+   * @param sort the order the products should be displayed. Values are "price", "size", "ID".
    */
   fetchFaces(sort = null) {
     const { productsUri, products, page, limit, isLoading } = this.state;
@@ -72,7 +71,7 @@ class Home extends Component {
   }
 
   /**
-   * Render the products
+   * Render the products in a grid form.
    *
    * @returns {*}
    */
@@ -103,7 +102,7 @@ class Home extends Component {
   };
 
   /**
-   * Generate a random ID for a sponsor image making sure it isn't equal as the previous one.
+   * Generate and return a random ID of a sponsor's image that isn't equal to the previous one.
    *
    * @returns {{ad: number}} ID of the next ad
    */
@@ -122,7 +121,7 @@ class Home extends Component {
   }
 
   /**
-   * Triggered when scrolling the browser. Upon reaching the end, more data is attached to the list
+   * Triggered when scrolling the browser. Upon reaching the bottom, more data is fetched and displayed.
    */
   handleScroll() {
     let wHeight = window.innerHeight;
@@ -142,8 +141,9 @@ class Home extends Component {
   }
 
   /**
-   * Triggered when changing the sort order drop-down.
-   * @param e element of which the value is verified
+   * Triggered when changing the sort option drop-down.
+   *
+   * @param e element of which the value is verified and sorted accordingly.
    */
   handleOnChange(e) {
     const allowedSorts = ["none", "size", "price", "id"];
