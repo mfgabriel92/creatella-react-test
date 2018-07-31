@@ -34,6 +34,12 @@ class Home extends Component {
     alert("Error")
   }
 
+  /**
+   * Fetch the products from the endpoint.
+   *
+   * @param sort order the products list by a given value price, size, or ID.
+   * of data.
+   */
   fetchFaces(sort = null) {
     const { productsUri, products, page, limit, isLoading } = this.state;
 
@@ -65,6 +71,11 @@ class Home extends Component {
       })
   }
 
+  /**
+   * Render the products
+   *
+   * @returns {*}
+   */
   renderFaces() {
     const { products } = this.state;
 
@@ -91,6 +102,11 @@ class Home extends Component {
     )
   };
 
+  /**
+   * Generate a random ID for a sponsor image making sure it isn't equal as the previous one.
+   *
+   * @returns {{ad: number}} ID of the next ad
+   */
   fetchAds() {
     const { previousAd } = this.state;
 
@@ -105,6 +121,9 @@ class Home extends Component {
     return { ad: id };
   }
 
+  /**
+   * Triggered when scrolling the browser. Upon reaching the end, more data is attached to the list
+   */
   handleScroll() {
     let wHeight = window.innerHeight;
     let scrollY = window.scrollY;
@@ -122,6 +141,10 @@ class Home extends Component {
     }
   }
 
+  /**
+   * Triggered when changing the sort order drop-down.
+   * @param e element of which the value is verified
+   */
   handleOnChange(e) {
     const allowedSorts = ["none", "size", "price", "id"];
     const sort = e.target.value;
