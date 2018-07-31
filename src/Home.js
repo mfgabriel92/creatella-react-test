@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Face from "./Face";
 import Loading from "./Loading";
+import Ad from "./Ad";
 
 class Home extends Component {
   constructor(props) {
@@ -11,7 +12,8 @@ class Home extends Component {
       page: 1,
       limit: 20,
       sort: null,
-      isLoading: false
+      previousAd: "",
+      isLoading: true
     }
   }
 
@@ -32,15 +34,15 @@ class Home extends Component {
   }
 
   fetchFaces(sort = null) {
-    const { products, page, limit } = this.state;
+    const { products, page, limit, isLoading } = this.state;
 
     let endpoint = `http://localhost:3000/products?_page=${page}&_limit=${limit}`;
 
-    if (sort) {
+    if (sort && sort !== "none") {
       endpoint += `&_sort=${sort}`;
     }
 
-    fetch(endpoint)
+    isLoading && fetch(endpoint)
       .then((res) => {
         return res.json()
       })
@@ -53,10 +55,12 @@ class Home extends Component {
           list = products.concat(data)
         }
 
+        list = list.concat(this.fetchAds());
+
         this.setState({
           products: list,
           isLoading: false
-        })
+        });
       })
   }
 
@@ -69,6 +73,14 @@ class Home extends Component {
 
     return (
       products.map((face) => {
+        if (face.hasOwnProperty("ad")) {
+          return (
+            <div key={face.ad} className="ads col-lg-12 text-center">
+              <Ad id={face.ad}/>
+            </div>
+          )
+        }
+
         return (
           <div key={face.id} className="col-lg-3 col-md-3 col-sm-2 col-xs-1 text-center">
             <Face face={face.face} size={face.size} price={face.price} date={face.date}/>
@@ -77,6 +89,17 @@ class Home extends Component {
       })
     )
   };
+
+  fetchAds() {
+    const { previousAd } = this.state;
+
+    let id = Math.floor(Math.random() * 1000);
+
+    if (previousAd !== id) {
+      // this.setState({ previousAd: id });
+      return { ad: id };
+    }
+  }
 
   handleScroll() {
     let wHeight = window.innerHeight;
@@ -98,7 +121,7 @@ class Home extends Component {
   }
 
   handleOnChange(e) {
-    const allowedSorts = ["size", "price", "id"];
+    const allowedSorts = ["none", "size", "price", "id"];
     const { value } = e.target;
 
     if (!allowedSorts.includes(value)) {
@@ -122,12 +145,12 @@ class Home extends Component {
         </p>
         <p>But first, a word from our sponsors:</p>
 
-        <img className="ad" src={`/ads/?r=${Math.floor(Math.random() * 1000)}`}/>
+        <Ad/>
 
         <div className="col-12 faces">
           <div className="row">
             <select name="order" className="form-control" onChange={this.handleOnChange.bind(this)}>
-              <option value="0">No order</option>
+              <option value="none">No order</option>
               <option value="size">By size</option>
               <option value="price">By price</option>
               <option value="id">By ID</option>
