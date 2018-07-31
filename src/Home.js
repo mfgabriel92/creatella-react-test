@@ -42,6 +42,8 @@ class Home extends Component {
       endpoint += `&_sort=${sort}`;
     }
 
+    console.log(isLoading)
+
     isLoading && fetch(endpoint)
       .then((res) => {
         return res.json()
@@ -108,17 +110,15 @@ class Home extends Component {
     let scrollY = window.scrollY;
     let oHeight = document.body.offsetHeight;
 
-    if ((wHeight + scrollY) >= oHeight) {
-      const { sort, isLoading } = this.state;
+    const { sort, isLoading } = this.state;
 
-      if (!isLoading) {
-        this.setState({
-          page: this.state.page + 1,
-          isLoading: true
-        });
+    if ((wHeight + scrollY) >= oHeight && !isLoading) {
+      this.setState({
+        page: this.state.page + 1,
+        isLoading: true
+      });
 
-        this.fetchFaces(sort);
-      }
+      this.fetchFaces(sort);
     }
   }
 
@@ -131,7 +131,12 @@ class Home extends Component {
       return;
     }
 
-    this.setState({ products: [], sort: value });
+    this.setState({
+      page: 1,
+      products: [],
+      sort: value,
+      isLoading: true
+    });
     this.fetchFaces(value);
   }
 
