@@ -95,10 +95,12 @@ class Home extends Component {
 
     let id = Math.floor(Math.random() * 1000);
 
-    if (previousAd !== id) {
-      // this.setState({ previousAd: id });
-      return { ad: id };
+    while (previousAd === id) {
+      id = Math.floor(Math.random() * 1000);
     }
+
+    this.setState({ previousAd: id });
+    return { ad: id };
   }
 
   handleScroll() {
