@@ -8,6 +8,7 @@ class Home extends Component {
     super(props);
 
     this.state = {
+      productsUri: 'http://localhost:3000/products',
       products: [],
       page: 1,
       limit: 20,
@@ -34,15 +35,13 @@ class Home extends Component {
   }
 
   fetchFaces(sort = null) {
-    const { products, page, limit, isLoading } = this.state;
+    const { productsUri, products, page, limit, isLoading } = this.state;
 
-    let endpoint = `http://localhost:3000/products?_page=${page}&_limit=${limit}`;
+    let endpoint = `${productsUri}?_page=${page}&_limit=${limit}`;
 
     if (sort && sort !== "none") {
       endpoint += `&_sort=${sort}`;
     }
-
-    console.log(isLoading)
 
     isLoading && fetch(endpoint)
       .then((res) => {
@@ -102,6 +101,7 @@ class Home extends Component {
     }
 
     this.setState({ previousAd: id });
+
     return { ad: id };
   }
 
@@ -124,20 +124,21 @@ class Home extends Component {
 
   handleOnChange(e) {
     const allowedSorts = ["none", "size", "price", "id"];
-    const { value } = e.target;
+    const sort = e.target.value;
 
-    if (!allowedSorts.includes(value)) {
-      alert("Error while sorting. Invalid parameter");
+    if (!allowedSorts.includes(sort)) {
+      alert(`Error while sorting. Invalid sort value '${sort}'`);
       return;
     }
 
     this.setState({
       page: 1,
       products: [],
-      sort: value,
+      sort,
       isLoading: true
     });
-    this.fetchFaces(value);
+
+    setTimeout(() => { this.fetchFaces(sort); }, 300)
   }
 
   render() {
