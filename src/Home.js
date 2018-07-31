@@ -93,7 +93,7 @@ class Home extends Component {
         }
 
         return (
-          <div key={face.id} className="col-lg-3 col-md-3 col-sm-2 col-xs-1 text-center">
+          <div key={face.id} className="col-lg-3 col-md-6 col-sm-12 text-center">
             <Face face={face.face} size={face.size} price={face.price} date={face.date}/>
           </div>
         )
@@ -161,7 +161,9 @@ class Home extends Component {
       isLoading: true
     });
 
-    setTimeout(() => { this.fetchFaces(sort); }, 300)
+    setTimeout(() => {
+      this.fetchFaces(sort);
+    }, 300)
   }
 
   render() {
@@ -176,16 +178,27 @@ class Home extends Component {
         </p>
         <p>But first, a word from our sponsors:</p>
 
-        <Ad/>
+        <div className="text-center">
+          <Ad/>
+        </div>
 
         <div className="col-12 faces">
           <div className="row">
-            <select name="order" className="form-control" onChange={this.handleOnChange.bind(this)}>
-              <option value="none">No order</option>
-              <option value="size">By size</option>
-              <option value="price">By price</option>
-              <option value="id">By ID</option>
-            </select>
+            <div className="col-lg-12">
+              <div className="row">
+                <div className="col-lg-1">
+                  Sort by:
+                </div>
+                <div className="col-lg-3">
+                  <select name="order" className="form-control" onChange={this.handleOnChange.bind(this)}>
+                    <option value="none">No order</option>
+                    <option value="size">By size</option>
+                    <option value="price">By price</option>
+                    <option value="id">By ID</option>
+                  </select>
+                </div>
+              </div>
+            </div>
 
             {this.renderFaces()}
 

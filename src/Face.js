@@ -25,7 +25,7 @@ class Face extends Component {
     let dateNow = new Date();
     let dayAdded = date.getDate();
     let today = dateNow.getDate();
-    let interval = today - dayAdded ;
+    let interval = today - dayAdded;
     let output = "Today";
 
     if (interval < 6) {
@@ -43,11 +43,21 @@ class Face extends Component {
   render() {
     const { face, size, price, date } = this.props;
 
-    return(
-      <div className="face">
-        <div style={{fontSize: size}}>{face}</div>
-        <div className="small">{this.formatPrice(price)}</div>
-        <div className="small">{this.formatDate(date)}</div>
+    return (
+      <div className="face position-relative">
+        <div className="image">
+          <span style={{ fontSize: size }}>{face}</span>
+        </div>
+        <div className="info position-absolute w-100">
+          <div className="row">
+            <div className="price col-lg-6 col-md-6 col-sm-6 col-xs-6 small text-muted text-left">
+              {this.formatPrice(price)}
+            </div>
+            <div className="date col-lg-6 col-md-6 col-sm-6 col-xs-6 small text-muted text-right">
+              {this.formatDate(date)}
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

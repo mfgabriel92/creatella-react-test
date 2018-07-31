@@ -6,7 +6,7 @@ const config = {
   entry: './src/app.js',
   output: {
     path: path.resolve(__dirname, './public'),
-    filename: 'bundle.js'
+    filename: 'js/bundle.js'
   },
   mode: "development",
   plugins: [
@@ -26,13 +26,22 @@ const config = {
           }
         ],
       }, {
-        test: /\.scss$/,
+        test: /\.(scss|ttf)/,
         use: [{
           loader: "style-loader"
         }, {
           loader: "css-loader"
         }, {
           loader: "sass-loader"
+        }]
+      }, {
+        test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'fonts/'
+          }
         }]
       }
     ]
