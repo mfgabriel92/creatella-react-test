@@ -1,5 +1,7 @@
-Products Grid
-====
+* [The Project](#products-grid)
+* [Installation](#installation)
+
+# Products Grid
 
 This is an ecommerce site, where you can buy all sorts of ascii faces like `(ノ・∀・)ノ` and `¯_(ツ)_/¯`, in a wide variety of font sizes. The homepage should display a list of products for people to browse.
 
@@ -67,3 +69,29 @@ Try to create a simple and elegant UI for this. You are free to use SASS or any 
 You're right! With something open-ended like this you could easily spend a week polishing and getting it just right. We don't expect you to do this, and we'll do our best to make sure you're not disadvantaged by this.
 
 When we grade this exam we're not giving you a "score out of 100" for how many features you complete. We're trying to get some insight into your process, to see the way you work. So, by all means, spend more time if you want to. But you are also free to leave certain features out and give a written explanation of how you would approach it. The best approach is to spend your time on the features that you think is the best way to show us your strengths and experience.
+
+# Installation
+
+To run this project in your computer, please follow the instructions below.
+
+Clone this repository
+
+> git clone https://github.com/mfgabriel92/creatella-react-test
+
+Enter the in cloned folder
+
+> cd creatella-react-test
+
+Install the dependencies of the project
+
+> npm install
+
+Generate the webpack file
+
+> npm run dist
+
+Finally, start the server locally
+
+> npm start
+
+Access your browser at `localhost:3000`
