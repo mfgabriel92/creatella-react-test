@@ -82,7 +82,7 @@ Enter in the cloned folder
 
 > cd creatella-react-test
 
-Install the dependencies of the project
+Install the dependencies for the project
 
 > npm install
 
