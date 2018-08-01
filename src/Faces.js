@@ -5,11 +5,6 @@ import Face from "./Face";
 import Loading from "./Loading";
 
 class Faces extends Component {
-  componentWillReceiveProps(nextProps) {
-    const nextList = nextProps.products;
-    const prevList = this.props.products;
-  }
-
   /**
    * Render the products in a grid form.
    *

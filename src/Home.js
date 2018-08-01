@@ -9,19 +9,19 @@ class Home extends Component {
     this.state = {
       productsUri: '/api/products',
       products: [],
+      nextProducts: [],
       totalProducts: 0,
       previousAd: "",
       page: 1,
       limit: 20,
       sort: null,
       isLoading: true,
-      hasAllProducts: false
+      hasAllProducts: false,
     }
   }
 
   componentWillMount() {
-    this.fetchFaces();
-    // this.fetchFacesCount();
+    this.fetchFirst20Faces();
   }
 
   componentDidMount() {
@@ -37,12 +37,12 @@ class Home extends Component {
   }
 
   /**
-   * Fetch the products from the endpoint.
+   * Generate the string endpoint for fetching products
    *
-   * @param sort the order the products should be displayed. Values are "price", "size", "ID".
+   * @returns {string} generated endpoint
    */
-  fetchFaces(sort = null) {
-    const { productsUri, products, totalProducts, page, limit, isLoading } = this.state;
+  generateEndpoint() {
+    const { productsUri, page, limit, sort } = this.state;
 
     let endpoint = `${productsUri}?_page=${page}&_limit=${limit}`;
 
@@ -50,25 +50,58 @@ class Home extends Component {
       endpoint += `&_sort=${sort}`;
     }
 
-    isLoading && fetch(endpoint)
-      .then((res) => {
-        if (totalProducts === 0) {
-          this.setState({
-            totalProducts: parseInt(res.headers.get("x-total-count"))
-          });
-        }
+    return endpoint;
+  }
 
-        return res.json()
-      })
-      .then((data) => {
-        let list = products.concat(data);
-        list = list.concat(this.fetchAds());
+  /**
+   * Fetch the products from the endpoint.
+   */
+  fetchFirst20Faces() {
+    const { products, totalProducts, isLoading } = this.state;
 
+    let endpoint = this.generateEndpoint();
+
+    isLoading && fetch(endpoint).then((res) => {
+      if (totalProducts === 0) {
         this.setState({
-          products: list,
-          isLoading: false,
+          totalProducts: parseInt(res.headers.get("x-total-count"))
         });
-      })
+      }
+
+      return res.json()
+    }).then((data) => {
+      let list = products.concat(data);
+      list = list.concat(this.fetchAds());
+
+      this.setState({
+        products: list,
+        isLoading: false,
+      });
+    }).then(() => {
+      this.setState({ page: this.state.page + 1 });
+      this.fetchNextFaces();
+    })
+  }
+
+  /**
+   * Fetch the next products for cache
+   */
+  fetchNextFaces() {
+    const { nextProducts } = this.state;
+
+    let endpoint = this.generateEndpoint();
+
+    fetch(endpoint).then((res) => {
+      return res.json()
+    }).then((data) => {
+      let list = nextProducts.concat(data);
+      list = list.concat(this.fetchAds());
+
+      this.setState({
+        nextProducts: list,
+        isLoading: false,
+      });
+    })
   }
 
   /**
@@ -94,19 +127,22 @@ class Home extends Component {
    * Triggered when scrolling the browser. Upon reaching the bottom, more data is fetched and displayed.
    */
   handleScroll() {
+    const { products, nextProducts, totalProducts, isLoading } = this.state;
+
     let wHeight = window.innerHeight;
     let scrollY = window.scrollY;
     let oHeight = document.body.offsetHeight;
+    let hasReachedBottom = (wHeight + scrollY) >= oHeight;
+    let hasNotAllProducts = totalProducts >= products.length;
 
-    const { sort, products, totalProducts, isLoading } = this.state;
-
-    if ((wHeight + scrollY) >= oHeight && !isLoading && totalProducts >= products.length) {
+    if (hasReachedBottom && hasNotAllProducts && !isLoading) {
       this.setState({
+        products: this.state.products.concat(nextProducts),
+        nextProducts: [],
         page: this.state.page + 1,
-        isLoading: true
       });
 
-      this.fetchFaces(sort);
+      this.fetchNextFaces();
     }
   }
 
@@ -127,17 +163,18 @@ class Home extends Component {
     this.setState({
       page: 1,
       products: [],
+      nextProducts: [],
       sort,
       isLoading: true
     });
 
     setTimeout(() => {
-      this.fetchFaces(sort);
+      this.fetchFirst20Faces();
     }, 300)
   }
 
   render() {
-    const { products, totalProducts, isLoading } = this.state;
+    const { products, nextProducts, totalProducts } = this.state;
 
     return (
       <div className="container">
@@ -167,7 +204,11 @@ class Home extends Component {
             </div>
           </div>
         </div>
-        <Faces products={products} isLoading={isLoading} totalProducts={totalProducts}/>
+        <Faces
+          products={products}
+          isLoading={nextProducts.length === 0}
+          totalProducts={totalProducts}
+        />
       </div>
     )
   }
