@@ -78,7 +78,7 @@ Clone this repository
 
 > git clone https://github.com/mfgabriel92/creatella-react-test
 
-Enter the in cloned folder
+Enter in the cloned folder
 
 > cd creatella-react-test
 
