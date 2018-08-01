@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import Face from "./Face";
-import Loading from "./Loading";
+import Faces from "./Faces";
 import Ad from "./Ad";
 
 class Home extends Component {
@@ -10,6 +9,7 @@ class Home extends Component {
     this.state = {
       productsUri: '/api/products',
       products: [],
+      nextProducts: [],
       page: 1,
       limit: 20,
       sort: null,
@@ -39,7 +39,7 @@ class Home extends Component {
    *
    * @param sort the order the products should be displayed. Values are "price", "size", "ID".
    */
-  fetchFaces(sort = null) {
+  fetchFaces(sort = null, field = "products") {
     const { productsUri, products, page, limit, isLoading } = this.state;
 
     let endpoint = `${productsUri}?_page=${page}&_limit=${limit}`;
@@ -53,53 +53,15 @@ class Home extends Component {
         return res.json()
       })
       .then((data) => {
-        let list = [];
-
-        if (products.length === 0) {
-          list = data
-        } else {
-          list = products.concat(data)
-        }
-
+        let list = products.concat(data);
         list = list.concat(this.fetchAds());
 
         this.setState({
           products: list,
-          isLoading: false
+          isLoading: false,
         });
       })
   }
-
-  /**
-   * Render the products in a grid form.
-   *
-   * @returns {*}
-   */
-  renderFaces() {
-    const { products } = this.state;
-
-    if (products.length === 0) {
-      return <Loading/>;
-    }
-
-    return (
-      products.map((face) => {
-        if (face.hasOwnProperty("ad")) {
-          return (
-            <div key={face.ad} className="ads col-lg-12 text-center">
-              <Ad id={face.ad}/>
-            </div>
-          )
-        }
-
-        return (
-          <div key={face.id} className="col-lg-3 col-md-6 col-sm-12 text-center">
-            <Face face={face.face} size={face.size} price={face.price} date={face.date}/>
-          </div>
-        )
-      })
-    )
-  };
 
   /**
    * Generate and return a random ID of a sponsor's image that isn't equal to the previous one.
@@ -182,29 +144,22 @@ class Home extends Component {
           <Ad/>
         </div>
 
-        <div className="col-12 faces">
+        <div className="col-lg-12">
           <div className="row">
-            <div className="col-lg-12">
-              <div className="row">
-                <div className="col-lg-1">
-                  Sort by:
-                </div>
-                <div className="col-lg-3">
-                  <select name="order" className="form-control" onChange={this.handleOnChange.bind(this)}>
-                    <option value="none">No order</option>
-                    <option value="size">By size</option>
-                    <option value="price">By price</option>
-                    <option value="id">By ID</option>
-                  </select>
-                </div>
-              </div>
+            <div className="col-lg-1">
+              Sort by:
             </div>
-
-            {this.renderFaces()}
-
-            {products.length >= 20 && <Loading show={isLoading}/>}
+            <div className="col-lg-3">
+              <select name="order" className="form-control" onChange={this.handleOnChange.bind(this)}>
+                <option value="none">No order</option>
+                <option value="size">By size</option>
+                <option value="price">By price</option>
+                <option value="id">By ID</option>
+              </select>
+            </div>
           </div>
         </div>
+        <Faces products={products} isLoading={isLoading}/>
       </div>
     )
   }
