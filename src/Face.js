@@ -23,18 +23,17 @@ class Face extends Component {
   formatDate(value) {
     let date = new Date(value);
     let dateNow = new Date();
-    let dayAdded = date.getDate();
-    let today = dateNow.getDate();
-    let interval = today - dayAdded;
+    let interval = Math.ceil((Math.abs(date - dateNow)) / (1000 * 60 * 60 * 24));
     let output = "Today";
 
     if (interval < 6) {
       let d = interval === 1 ? "day" : "days";
       output = `${interval} ${d} ago`;
     } else if (interval > 6) {
+      let day = date.getDate();
       let month = date.getMonth();
       let year = date.getFullYear();
-      output = `${month}/${dayAdded}/${year}`;
+      output = `${month}/${day}/${year}`;
     }
 
     return output;

@@ -56,7 +56,7 @@ class Faces extends Component {
 }
 
 Faces.propTypes = {
-  products: PropTypes.object.isRequired,
+  products: PropTypes.array.isRequired,
   isLoading: PropTypes.bool.isRequired
 };
 
