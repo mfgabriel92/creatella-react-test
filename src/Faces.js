@@ -42,13 +42,17 @@ class Faces extends Component {
   };
 
   render() {
-    const { products, isLoading } = this.props;
+    const { products, isLoading, totalProducts } = this.props;
 
     return (
       <div className="col-lg-12 faces">
         <div className="row">
           {this.renderFaces()}
-          {products.length >= 20 && <Loading show={isLoading}/>}
+          {
+            totalProducts >= products.length
+              ? products.length >= 20 && <Loading show={isLoading}/>
+              : <p className="m-auto">~ end of catalogue ~</p>
+          }
         </div>
       </div>
     )
@@ -57,9 +61,8 @@ class Faces extends Component {
 
 Faces.propTypes = {
   products: PropTypes.array.isRequired,
-  isLoading: PropTypes.bool.isRequired
+  isLoading: PropTypes.bool.isRequired,
+  totalProducts: PropTypes.bool.isRequired
 };
-
-Faces.defaultProps = {};
 
 export default Faces;

@@ -9,17 +9,19 @@ class Home extends Component {
     this.state = {
       productsUri: '/api/products',
       products: [],
-      nextProducts: [],
+      totalProducts: 0,
+      previousAd: "",
       page: 1,
       limit: 20,
       sort: null,
-      previousAd: "",
-      isLoading: true
+      isLoading: true,
+      hasAllProducts: false
     }
   }
 
   componentWillMount() {
     this.fetchFaces();
+    // this.fetchFacesCount();
   }
 
   componentDidMount() {
@@ -39,8 +41,8 @@ class Home extends Component {
    *
    * @param sort the order the products should be displayed. Values are "price", "size", "ID".
    */
-  fetchFaces(sort = null, field = "products") {
-    const { productsUri, products, page, limit, isLoading } = this.state;
+  fetchFaces(sort = null) {
+    const { productsUri, products, totalProducts, page, limit, isLoading } = this.state;
 
     let endpoint = `${productsUri}?_page=${page}&_limit=${limit}`;
 
@@ -50,6 +52,12 @@ class Home extends Component {
 
     isLoading && fetch(endpoint)
       .then((res) => {
+        if (totalProducts === 0) {
+          this.setState({
+            totalProducts: parseInt(res.headers.get("x-total-count"))
+          });
+        }
+
         return res.json()
       })
       .then((data) => {
@@ -90,9 +98,9 @@ class Home extends Component {
     let scrollY = window.scrollY;
     let oHeight = document.body.offsetHeight;
 
-    const { sort, isLoading } = this.state;
+    const { sort, products, totalProducts, isLoading } = this.state;
 
-    if ((wHeight + scrollY) >= oHeight && !isLoading) {
+    if ((wHeight + scrollY) >= oHeight && !isLoading && totalProducts >= products.length) {
       this.setState({
         page: this.state.page + 1,
         isLoading: true
@@ -129,7 +137,7 @@ class Home extends Component {
   }
 
   render() {
-    const { products, isLoading } = this.state;
+    const { products, totalProducts, isLoading } = this.state;
 
     return (
       <div className="container">
@@ -159,7 +167,7 @@ class Home extends Component {
             </div>
           </div>
         </div>
-        <Faces products={products} isLoading={isLoading}/>
+        <Faces products={products} isLoading={isLoading} totalProducts={totalProducts}/>
       </div>
     )
   }

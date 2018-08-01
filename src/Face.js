@@ -24,7 +24,7 @@ class Face extends Component {
     let date = new Date(value);
     let dateNow = new Date();
     let interval = Math.ceil((Math.abs(date - dateNow)) / (1000 * 60 * 60 * 24));
-    let output = "Today";
+    let output;
 
     if (interval < 6) {
       let d = interval === 1 ? "day" : "days";
@@ -34,6 +34,8 @@ class Face extends Component {
       let month = date.getMonth();
       let year = date.getFullYear();
       output = `${month}/${day}/${year}`;
+    } else {
+      output = "Today";
     }
 
     return output;
