@@ -57,11 +57,11 @@ class Home extends Component {
    * Fetch the products from the endpoint.
    */
   fetchFirst20Faces() {
-    const { products, totalProducts, isLoading } = this.state;
+    const { totalProducts } = this.state;
 
     let endpoint = this.generateEndpoint();
 
-    isLoading && fetch(endpoint).then((res) => {
+    fetch(endpoint).then((res) => {
       if (totalProducts === 0) {
         this.setState({
           totalProducts: parseInt(res.headers.get("x-total-count"))
@@ -70,8 +70,7 @@ class Home extends Component {
 
       return res.json()
     }).then((data) => {
-      let list = products.concat(data);
-      list = list.concat(this.fetchAds());
+      let list = data.concat(this.fetchAds());
 
       this.setState({
         products: list,
@@ -87,15 +86,12 @@ class Home extends Component {
    * Fetch the next products for cache
    */
   fetchNextFaces() {
-    const { nextProducts } = this.state;
-
     let endpoint = this.generateEndpoint();
 
     fetch(endpoint).then((res) => {
       return res.json()
     }).then((data) => {
-      let list = nextProducts.concat(data);
-      list = list.concat(this.fetchAds());
+      let list = data.concat(this.fetchAds());
 
       this.setState({
         nextProducts: list,
@@ -180,7 +176,7 @@ class Home extends Component {
       <div className="container">
         <h1>Products Grid</h1>
         <p>
-          Here you're sure to find a bargain on some of the finest ascii available to purchase. Be sure to peruse our
+          Here you are sure to find a bargain on some of the finest ascii available to purchase. Be sure to peruse our
           selection of ascii faces in an exciting range of sizes and prices.
         </p>
         <p>But first, a word from our sponsors:</p>
